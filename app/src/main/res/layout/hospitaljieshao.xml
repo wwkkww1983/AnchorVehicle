@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#d6d8d8"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gztop" >
+
+        <Button
+            android:id="@+id/jieshaoback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/gzback" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="医院介绍"
+            android:textColor="#2a2a2a"
+            android:textSize="26dp" />
+
+        <Button
+            android:id="@+id/jieshaoreset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/gzreset" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="医院特色："
+                android:textColor="#ff8e14"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/tvtese"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:text="糖尿病专科医院  糖尿病专科医院  糖尿病专科医院  糖尿病专科医院"
+                android:textColor="#000000"
+                android:textSize="24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="医疗设备："
+                android:textColor="#ff8e14"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/tvshebei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:text="糖尿病专科医院  糖尿病专科医院  糖尿病专科医院  糖尿病专科医院"
+                android:textColor="#000000"
+                android:textSize="24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="基础信息："
+                android:textColor="#ff8e14"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/tvjieshao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:text="糖尿病专科医院  糖尿病专科医院  糖尿病专科医院  糖尿病专科医院"
+                android:textColor="#000000"
+                android:textSize="24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="其他信息："
+                android:textColor="#ff8e14"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/tvqita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:text="糖尿病专科医院  糖尿病专科医院  糖尿病专科医院  糖尿病专科医院"
+                android:textColor="#000000"
+                android:textSize="24dp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

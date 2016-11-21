@@ -1,0 +1,35 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "24.0.2"
+
+    defaultConfig {
+        applicationId "com.anke.vehicle"
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 8
+        versionName "4.5.0"
+    }
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+        // 防止在发布的时候出现因MissingTranslation导致Build Failed!
+        disable 'MissingTranslation'}
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs/android_api_1.1_forsdk.jar')
+    compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/galaxy_mini.jar')
+    compile files('libs/gson-2.1.jar')
+    compile files('libs/netty-all-4.0.33.Final.jar')
+    compile files('libs/netty-all-4.0.33.Final-sources.jar')
+}

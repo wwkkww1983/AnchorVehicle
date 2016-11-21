@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#f0f0f0"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/jilutop" >
+
+        <Button
+            android:id="@+id/hisback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/jlback_style" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="知识库"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/ziti_20sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff" >
+
+        <Button
+            android:id="@+id/btdupin"
+            style="@style/BtnKnowledge"
+            android:background="@drawable/klon"
+            android:text="毒   品"
+            android:textColor="#1C86EE" />
+
+        <ImageView
+            style="@style/imgKnowledge"/>
+
+        <Button
+            android:id="@+id/bthuaxue"
+            style="@style/BtnKnowledge"
+            android:text="化学品"
+            />
+
+        <ImageView
+            style="@style/imgKnowledge"/>
+
+        <Button
+            android:id="@+id/btjzcs"
+            style="@style/BtnKnowledge"
+            android:text="救治措施" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/llyguojiasearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp" >
+
+        <EditText
+            android:id="@+id/etsearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/knowserch"
+            android:background="@drawable/search_input_bg"            
+            android:hint="搜索拼音头"
+            android:padding="10dp"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:textColor="#000000"
+            android:textColorHint="#aaaaaa"
+            android:textSize="15dp" />
+        
+        <ImageView android:id="@+id/imgknowdelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/juli_10dp"
+            android:background="@drawable/knowdelete"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+
+        <TextView
+            android:id="@+id/tvkl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="@dimen/ziti_20sp" />
+    </ScrollView>
+
+</LinearLayout>

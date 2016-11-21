@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="gpsbutton" type="id"/>
+    <item name="btonoffduty" type="id" />
+    <item name="pttbutton" type="id" />
+    <item name="bthome" type="id" />
+    <item name="bthistory" type="id" />
+    <item name="llystatebt" type="id" />
+    <item name="tvnext" type="id" />
+    <item name="tv_tishi" type="id" />
+</resources>

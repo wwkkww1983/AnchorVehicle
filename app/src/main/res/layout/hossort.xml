@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#d6d8d8"
+    android:focusable="true" 
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="match_parent"        
+        android:background="@drawable/gztop"       
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/sortback"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"   
+            android:layout_centerVertical="true"        
+            android:background="@drawable/gzback" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"            
+            android:layout_centerInParent="true" 
+            android:text="医院等级排序"  
+            android:textSize="26dp"        
+            android:textColor="#2a2a2a" />
+         <Button
+            android:id="@+id/sortreset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/gzreset" />
+    </RelativeLayout> 
+    <LinearLayout        
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"   
+        android:background="#e5e5e5"     
+        android:gravity="center" >
+
+        <EditText
+            android:id="@+id/etsort"
+           android:layout_width="wrap_content"
+            android:layout_height="wrap_content"  
+            android:hint="搜索医院设备及专长"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="25dp"
+            android:singleLine="true"
+            android:textColor="#000000"
+            android:textColorHint="#aaaaaa"                   
+            android:background="@drawable/gztextbox"
+            >
+        </EditText>
+
+        <Button
+            android:id="@+id/sortsearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:background="@drawable/gzsearch"
+            />
+
+    </LinearLayout>
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gaozhiitem" >
+
+        <TextView            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:textColor="#333333"
+            android:textSize="26dp"
+            android:text="三级医院列表" />
+
+        <Button            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"          
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/gzmore"
+             android:visibility="gone"
+            />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listsj"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gaozhiitem" >
+
+        <TextView            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:textColor="#333333"
+            android:textSize="26dp"
+            android:text="二级医院列表" />
+
+        <Button            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"          
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/gzmore"
+             android:visibility="gone"
+            />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listej"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gaozhiitem" >
+
+        <TextView            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:textColor="#333333"
+            android:textSize="26dp"
+            android:text="一级医院列表" />
+
+        <Button            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"          
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/gzmore"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listyj"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+ 
+</LinearLayout>

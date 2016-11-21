@@ -1,0 +1,23 @@
+<resources>
+
+    <dimen name="tuzhongdaiming">26dp</dimen>
+    <dimen name="height">49dp</dimen>
+    <dimen name="ziti_10sp">10sp</dimen>
+    <dimen name="ziti_13sp">13sp</dimen>
+    <dimen name="ziti_15sp">15sp</dimen>
+    <dimen name="ziti_16sp">18sp</dimen>
+    <dimen name="ziti_20sp">20sp</dimen>
+    <dimen name="ziti_25sp">25sp</dimen>
+    <dimen name="juli_0dp">0dp</dimen>
+    <dimen name="juli_5dp">5dp</dimen>
+    <dimen name="juli_10dp">10dp</dimen>
+    <dimen name="juli_15dp">25dp</dimen>
+    <dimen name="juli_20dp">25dp</dimen>
+    <dimen name="juli_30dp">30dp</dimen>
+    <dimen name="juli_40dp">55dp</dimen>
+    <dimen name="juli_50dp">50dp</dimen>
+    <dimen name="juli_55dp">55dp</dimen>
+    <dimen name="juli_60dp">60dp</dimen>
+    <dimen name="juli_80dp">80dp</dimen>
+    <dimen name="juli_90dp">100dp</dimen>
+</resources>

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/jilutop">
+
+        <Button
+            android:id="@+id/btNewTaskback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/jlback" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="新增任务"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/ziti_20sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.9"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="选择急救中心"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:id="@+id/llyguojiasearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <EditText
+                android:id="@+id/etsearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/sheng2"
+                android:drawableRight="@drawable/xiala"
+                android:imeOptions="actionSearch"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:text="安徽省"
+                android:textColor="#000"
+                android:textColorHint="#aaaaaa"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/etsearch"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/sheng2"
+                android:drawableRight="@drawable/xiala"
+                android:imeOptions="actionSearch"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:text="合肥市"
+                android:textColor="#000"
+                android:textColorHint="#aaaaaa"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+
+            <EditText
+                android:id="@+id/etsearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/jijiuzhizhong"
+                android:drawableRight="@drawable/xiala"
+                android:imeOptions="actionSearch"
+                android:padding="5dp"
+
+                android:singleLine="true"
+                android:text="请选择急救中心"
+                android:textColor="#000"
+                android:textColorHint="#aaaaaa"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#777"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/juli_20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/juli_10dp"
+            android:paddingLeft="@dimen/juli_10dp"
+            android:text="请填写新增任务相关信息"
+            android:textColor="#000"
+            android:textSize="@dimen/ziti_15sp" />
+
+        <LinearLayout
+            android:id="@+id/llyWaitAddr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/juli_30dp"
+            android:layout_marginRight="@dimen/juli_30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="起点："
+                android:padding="5dp"
+                android:textColor="#000"
+                android:textColorHint="#aaaaaa"
+                android:textSize="@dimen/ziti_15sp" />
+
+            <EditText
+                android:id="@+id/etWaitAddr"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/jiechedizhi"
+                android:enabled="false"
+                android:hint="请点击右边地图按钮"
+                android:imeOptions="actionSearch"
+                android:padding="5dp"
+                android:textColor="#000"
+                android:textColorHint="#aaaaaa"
+                android:textSize="@dimen/ziti_15sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btWaitAddr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/diwei_style" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llySendAddr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/juli_30dp"
+            android:layout_marginRight="@dimen/juli_30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="终点："
+                android:padding="5dp"
+                android:textColor="#000"
+                android:textColorHint="#aaaaaa"
+                android:textSize="@dimen/ziti_15sp" />
+
+            <EditText
+                android:id="@+id/etSendAddr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/jiechedizhi"
+                android:enabled="false"
+                android:hint="请点击右边地图按钮"
+                android:imeOptions="actionSearch"
+                android:padding="5dp"
+                android:textColor="#000"
+                android:textColorHint="#aaaaaa"
+                android:textSize="@dimen/ziti_15sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btSendAddr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/diwei_style" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llyDescribe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/juli_30dp"
+            android:layout_marginRight="@dimen/juli_30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+
+            <EditText
+                android:id="@+id/etDescribe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/jiechedizhi"
+                android:hint="病人情况"
+                android:imeOptions="actionSearch"
+                android:padding="5dp"
+                android:textColor="#000"
+                android:textColorHint="#aaaaaa"
+                android:textSize="@dimen/ziti_15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llyRemark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/juli_30dp"
+            android:layout_marginRight="@dimen/juli_30dp"
+            android:layout_marginTop="@dimen/juli_10dp"
+            android:gravity="center_horizontal">
+
+            <EditText
+                android:id="@+id/etRemark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/beizhu"
+                android:gravity="top"
+                android:hint="备注"
+                android:imeOptions="actionSearch"
+                android:padding="5dp"
+                android:textColor="#000"
+                android:textColorHint="#aaaaaa"
+                android:textSize="@dimen/ziti_15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llyguojiasearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/btSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/juli_20dp"
+                android:background="@drawable/tijiao_style"
+                android:text="提交"
+                android:textColor="#fff"
+                android:textSize="@dimen/ziti_16sp"
+
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

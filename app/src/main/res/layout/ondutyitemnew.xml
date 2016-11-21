@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/juli_60dp"
+        android:background="@drawable/lh" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/juli_20dp" >
+
+                <TextView
+                    android:layout_width="@dimen/juli_50dp"
+                    android:gravity="center"
+                    android:textColor="#18B8D8"
+                    android:textSize="@dimen/ziti_15sp"
+                    android:layout_height="wrap_content"
+                    android:text="工号" />
+
+                <TextView
+                    android:layout_width="@dimen/juli_50dp"
+                    android:layout_marginLeft="@dimen/juli_20dp"
+                    android:gravity="center"
+                    android:textColor="#18B8D8"
+                    android:textSize="@dimen/ziti_15sp"
+                    android:layout_height="wrap_content"
+                    android:text="类型" />
+
+                <TextView
+                    android:layout_width="@dimen/juli_80dp"
+                    android:layout_marginLeft="@dimen/juli_20dp"
+                    android:gravity="center"
+                    android:textColor="#18B8D8"
+                    android:textSize="@dimen/ziti_15sp"
+                    android:layout_height="wrap_content"
+                    android:text="姓名" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="@dimen/juli_20dp" >
+
+                <TextView
+                    android:id="@+id/tvgonghao"
+                    android:layout_width="@dimen/juli_50dp"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/ziti_15sp"
+                    android:layout_height="wrap_content"
+                    android:text="00005" />
+
+                <TextView
+                    android:id="@+id/tvtype"
+                     android:layout_width="@dimen/juli_50dp"
+                    android:layout_marginLeft="@dimen/juli_20dp"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/ziti_15sp"
+                    android:layout_height="wrap_content"
+                    android:text="司机" />
+
+                <TextView
+                    android:id="@+id/tvname"
+                     android:layout_width="@dimen/juli_80dp"
+                    android:layout_marginLeft="@dimen/juli_20dp"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/ziti_15sp"
+                    android:layout_height="wrap_content"
+                    android:text="老胡测试" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btoffduty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/che_style"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/ziti_15sp"
+            android:text=" 下   班  " />
+    </RelativeLayout> 
+</LinearLayout>

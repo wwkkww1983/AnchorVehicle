@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<declare-styleable name="SetView">
+<attr name="custsrc" format="reference|color" />
+<attr name="name" format="string" />
+</declare-styleable>
+</resources>

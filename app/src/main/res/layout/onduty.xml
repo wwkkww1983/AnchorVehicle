@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#18B8D8" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:padding="@dimen/juli_10dp"
+            android:text="随车人员信息"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/ziti_15sp" />
+
+        <Button
+            android:id="@+id/btrefrash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/juli_10dp"
+            android:background="@drawable/guanbi"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lvlhlist"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.34"
+        android:cacheColorHint="#00000000"
+        android:divider="#00000000"
+        android:dividerHeight="0px"
+        android:fadingEdge="none"
+        android:scrollbars="vertical"
+        android:scrollingCache="false" >
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/llypinglun"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/lh"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:id="@+id/rlamblevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:padding="5dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="选车辆级别："
+                android:textColor="#000000"
+                android:textSize="@dimen/ziti_13sp" />
+
+            <RadioGroup
+                android:id="@+id/rg_AmbLevel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_toRightOf="@id/textView1"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/raB_fristAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/etfasong"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_style"
+                    android:text="急救"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/ziti_13sp" />
+
+                <RadioButton
+                    android:id="@+id/raB_NofristAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_style"
+                    android:text="非急救"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/ziti_13sp" />
+
+                <RadioButton
+                    android:id="@+id/raB_hospital"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_style"
+                    android:text="转院"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/ziti_13sp" />
+            </RadioGroup>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlpersonlevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:padding="5dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="选人员类型："
+                android:textColor="#000000"
+                android:textSize="@dimen/ziti_13sp" />
+
+            <RadioGroup
+                android:id="@+id/rg_PersonType"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView2"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/raB_driver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_style"
+                    android:text="司机"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/ziti_13sp" />
+
+                <RadioButton
+                    android:id="@+id/raB_Stretcher"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_style"
+                    android:text="担架工"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/ziti_13sp" />
+
+                <RadioButton
+                    android:id="@+id/raB_doctor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_style"
+                    android:text="医生"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/ziti_13sp" />
+
+                <RadioButton
+                    android:id="@+id/raB_nurse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_style"
+                    android:text="护士"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/ziti_13sp" />
+            </RadioGroup>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_marginLeft="@dimen/juli_20dp"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="请输入工号："
+                android:textColor="#000000"
+                android:textSize="@dimen/ziti_13sp" />
+
+            <EditText
+                android:id="@+id/etfasong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:padding="5dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/btfasong"
+                android:layout_toRightOf="@+id/textView3"
+                android:background="@drawable/shurukuang" 
+                android:textSize="@dimen/ziti_13sp"
+                />
+
+            <Button
+                android:id="@+id/btfasong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_alignTop="@+id/etfasong"
+                android:background="@drawable/shangban_style"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/ziti_15sp"
+                android:text=" 上   班  "
+                android:layout_marginRight="10dp"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

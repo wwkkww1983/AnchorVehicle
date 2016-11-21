@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+	>
+
+    <TextView
+        android:id="@+id/tvdtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0075B6"
+        android:gravity="center_horizontal|center_vertical"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="分站列表"
+        android:textColor="#fff"
+        android:textSize="@dimen/ziti_15sp" >
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <ListView
+            android:id="@+id/lvdig"
+            android:layout_width="fill_parent"
+            android:layout_height="300dp"
+            android:cacheColorHint="#00000000"
+            android:divider="#00000000"
+            android:dividerHeight="0px"
+            android:fadingEdge="none"
+            android:scrollbars="vertical"
+            android:scrollingCache="false" >
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/juli_20dp"
+        android:gravity="bottom|center_horizontal"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/positiveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#0075B6"
+            android:paddingBottom="5dp"
+            android:paddingLeft="@dimen/juli_10dp"
+            android:paddingRight="@dimen/juli_10dp"
+            android:paddingTop="5dp"
+            android:text="确定"
+            android:textColor="#fff"
+            android:textSize="@dimen/ziti_15sp" />
+
+        <Button
+            android:id="@+id/negativeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/juli_50dp"
+            android:background="#0075B6"
+            android:paddingBottom="5dp"
+            android:paddingLeft="@dimen/juli_10dp"
+            android:paddingRight="@dimen/juli_10dp"
+            android:paddingTop="5dp"
+            android:text="取消"
+            android:textColor="#fff"
+            android:textSize="@dimen/ziti_15sp" />
+    </LinearLayout>
+
+</LinearLayout>

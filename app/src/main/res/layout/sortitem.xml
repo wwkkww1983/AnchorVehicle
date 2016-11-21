@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/gaozhiitem"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/sortcontent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:text="北京市积水潭医院"
+            android:textColor="#6c6c6c"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/sorttel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="14dp"
+            android:layout_alignParentRight="true"            
+            android:background="@drawable/gztel" />
+
+        <TextView
+            android:id="@+id/tvkm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="28dp"
+            android:textColor="#ff8e14"
+            android:textSize="18dp"
+            android:layout_toLeftOf="@+id/sorttel"
+            android:text="16km" />
+                  
+    </RelativeLayout>
+
+</LinearLayout>

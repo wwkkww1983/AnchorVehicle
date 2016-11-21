@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zcq="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/jilutop" >
+
+        <Button
+            android:id="@+id/btSetback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/jlback_style" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="我的设置"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/ziti_20sp" />
+    </RelativeLayout>
+    <!--使用自定义布局-->
+    <com.anke.vehicle.view.SetView
+        android:id="@+id/svAddTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        zcq:custsrc="@drawable/xinzengrenwu"
+        zcq:name="新增任务"
+        />
+    <com.anke.vehicle.view.SetView
+        android:id="@+id/svFenZhan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        zcq:custsrc="@drawable/dangqianfenzhan"
+        zcq:name="当前分站"
+        />
+    <com.anke.vehicle.view.SetView
+        android:id="@+id/svPause"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        zcq:custsrc="@drawable/zantingdiaoyong"
+        zcq:name="暂停调用"
+        />
+    <com.anke.vehicle.view.SetView
+        android:id="@+id/svDataUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        zcq:custsrc="@drawable/shujugengxin"
+        zcq:name="数据更新"
+        />
+    <com.anke.vehicle.view.SetView
+        android:id="@+id/svSetting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        zcq:custsrc="@drawable/canshushezhi"
+        zcq:name="参数设置"
+        />
+</LinearLayout>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/jilutop" >
+
+        <Button
+            android:id="@+id/upback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/jlback" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="数据上传"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/ziti_20sp" />
+    </RelativeLayout>
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        
+   <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/juli_20dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="送往地址"
+            android:textSize="@dimen/ziti_16sp"
+            android:textColor="#000000" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/ethospital"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/songwangdizhi"
+            android:hint="搜索拼音头"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="5dp">
+        </EditText>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/juli_20dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="主诉判断"
+            android:textSize="@dimen/ziti_16sp"
+            android:textColor="#000000" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/etjudge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/songwangdizhi"
+            android:layout_marginRight="40dp"
+            android:hint="搜索拼音头"
+            android:layout_marginLeft="5dp">
+        </EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/juli_20dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="病        情"
+            android:textSize="@dimen/ziti_16sp"
+            android:gravity="center_vertical"
+            android:textColor="#000000" >
+        </TextView>
+
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <EditText
+            android:id="@+id/etBingqing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bingqing"
+            android:layout_weight="1.2"
+            android:hint="最多6个字"
+            android:maxLength="6"
+            android:paddingLeft="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:enabled="false">
+        </EditText>
+
+        <Button 
+            android:id="@+id/btnSelect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xuan_style"
+            android:layout_marginRight="40dp"
+            android:text="选"
+            android:textColor="#fff"
+            android:textSize="@dimen/ziti_16sp"
+            android:layout_marginLeft="@dimen/juli_5dp"
+            android:layout_weight="3"/>
+            
+        </LinearLayout>
+        <EditText
+            android:id="@+id/etBingqing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bingqing"
+            >
+        </EditText>
+        <Button 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xuan"
+            android:layout_marginRight="40dp"
+            />
+    </LinearLayout>
+
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="bottom" >      
+
+        <Button
+            android:id="@+id/bt_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/shangchuan_style"
+            android:text="告知"
+            android:textSize="@dimen/ziti_20sp"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/juli_20dp" />
+    </LinearLayout>
+ </LinearLayout>
+</LinearLayout>

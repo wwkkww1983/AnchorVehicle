@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/cmdback"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/lblatel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:text="呼救电话："
+                            android:textColor="#4169E1"
+                            android:textSize="22dp" />
+
+                        <TextView
+                            android:id="@+id/hisAlarmtel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_toRightOf="@+id/lblatel"
+                            android:text="13810121090"
+                            android:textColor="#0979B6"
+                            android:textSize="21dp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/hisltel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:text="联系电话："
+                            android:textColor="#4169E1"
+                            android:textSize="23dp" />
+
+                        <TextView
+                            android:id="@+id/hisLinktel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_toRightOf="@+id/hisltel"
+                            android:text="18600070592"
+                            android:textColor="#0979B6"
+                            android:textSize="23dp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:paddingBottom="5dp"
+                        android:text="现场地址：北京市海淀区上地东路29号珠海安克电子技术有限公司\r\n\r\n
+接车地址：封疆大吏卡萨解放路口的撒娇疯\r\n
+\r\n
+患者姓名：张三三\r\n
+\r\n
+联系人：李思思\r\n
+\r\n
+主诉：帕金森综合症\r\n
+\r\n
+送往地点：协和医院\r\n
+\r\n
+患者姓名：gggggg\r\n
+\r\n
+患者姓名：3333333\r\n
+\r\n
+患者姓名：222222\r\n
+\r\n
+患者姓名：12321312"
+                        android:textColor="#4169E1"
+                        android:textSize="19dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/hisShiGu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="事故：某某地方发生大爆炸"
+                            android:textColor="#ff0000"
+                            android:textSize="22dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

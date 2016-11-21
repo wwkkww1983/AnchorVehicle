@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llmain"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/backgroud"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rltitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title">
+
+        <Button
+            android:id="@+id/btSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/setting_style" />
+
+        <TextView
+            android:id="@+id/tvState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:onClick="onClickUpdate"
+            android:text="收到指令"
+            android:textColor="#ff0000"
+            android:textSize="23sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/amboff"
+            android:onClick="menuButtun" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llycenter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/juli_10dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvcentername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="北京120急救中心"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/ziti_20sp" />
+
+        <TextView
+            android:id="@+id/tvambname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:text="指挥1"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/ziti_16sp" />
+
+        <TextView
+            android:id="@+id/tvvison"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:text="V3.0"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/ziti_16sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/stateback">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ambstate" />
+
+        <TextView
+            android:id="@+id/tvStatemain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:onClick="onClickUpdate"
+            android:text="途中待命"
+            android:textColor="#00CD00"
+            android:textSize="@dimen/ziti_25sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/rlAmbPer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvAmbPer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/juli_30dp"
+            android:text="随车人员信息"
+            android:textColor="#1C86EE"
+            android:textSize="@dimen/ziti_20sp" />
+
+        <TextView
+            android:id="@+id/tvView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/juli_15dp"
+            android:text="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+            android:textColor="#BEBEBE"
+            android:textSize="@dimen/ziti_13sp" />
+
+        <RelativeLayout
+            android:id="@+id/rlSiji"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvView">
+
+            <TextView
+                android:id="@+id/tvSijiView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/juli_55dp"
+                android:text="司机："
+                android:textColor="#1C86EE"
+                android:textSize="@dimen/ziti_15sp" />
+
+            <TextView
+                android:id="@+id/tvSiji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/tvSijiView"
+                android:text=""
+                android:textColor="#121212"
+                android:textSize="@dimen/ziti_15sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlYisheng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlSiji">
+
+            <TextView
+                android:id="@+id/tvYishengView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/juli_55dp"
+                android:text="医生："
+                android:textColor="#1C86EE"
+                android:textSize="@dimen/ziti_15sp" />
+
+            <TextView
+                android:id="@+id/tvYisheng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/tvYishengView"
+                android:text=""
+                android:textColor="#121212"
+                android:textSize="@dimen/ziti_15sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlHushi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlHushi">
+
+            <TextView
+                android:id="@+id/tvHushiView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/juli_55dp"
+                android:text="护士："
+                android:textColor="#1C86EE"
+                android:textSize="@dimen/ziti_15sp" />
+
+            <TextView
+                android:id="@+id/tvHushi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/tvHushiView"
+                android:text=""
+                android:textColor="#121212"
+                android:textSize="@dimen/ziti_15sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlycommand"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="60"
+        android:background="@drawable/cmdback"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rlalarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/lblAlarmtel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="呼救电话："
+                    android:textColor="#4169E1"
+                    android:textSize="23dp" />
+
+                <TextView
+                    android:id="@+id/tvAlarmtel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/lblAlarmtel"
+                    android:text="xx"
+                    android:textColor="#ff0000"
+                    android:textSize="23dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rllink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/lblLinktel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="联系电话："
+                    android:textColor="#4169E1"
+                    android:textSize="23dp" />
+
+                <TextView
+                    android:id="@+id/tvLinktel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/lblLinktel"
+                    android:text="xx"
+                    android:textColor="#ff0000"
+                    android:textSize="23dp" />
+            </RelativeLayout>
+
+            <ScrollView
+                android:id="@+id/scrollView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDatatime">
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:paddingBottom="5dp"
+                    android:text="现场地址："
+                    android:textColor="#4169E1"
+                    android:textSize="17dp" />
+            </ScrollView>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlstop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/juli_10dp">
+
+            <Button
+                android:id="@+id/btstop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/juli_10dp"
+                android:background="@drawable/stop_style" />
+
+            <Button
+                android:id="@+id/bt_tell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/juli_10dp"
+                android:background="@drawable/ws_style_1"
+                android:textColor="#ffffff"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/rlstop"
+            android:layout_marginBottom="@dimen/juli_60dp">
+
+            <Button
+                android:id="@+id/btaccdint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/juli_10dp"
+                android:background="@drawable/accident_style" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/llystate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="@dimen/juli_40dp"
+            android:layout_marginRight="@dimen/juli_40dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/nexthuisenew"
+            android:text="下一状态"
+            android:textColor="#BDBDBD"
+            android:textSize="@dimen/ziti_20sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/llystatebt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/btNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="@dimen/juli_40dp"
+            android:layout_marginRight="@dimen/juli_40dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/next_style"
+            android:textSize="@dimen/ziti_20sp" />
+
+        <TextView
+            android:id="@+id/tv_tishi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tvxx"
+            android:text="下一状态"
+            android:textColor="#000000"
+            android:textSize="@dimen/ziti_20sp" />
+
+        <TextView
+            android:id="@+id/tvxx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/imgnext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/juli_10dp"
+            android:layout_toRightOf="@+id/tvxx"
+            android:background="@drawable/imgnext" />
+
+        <TextView
+            android:id="@+id/tvNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_tishi"
+            android:layout_marginLeft="@dimen/juli_10dp"
+            android:layout_toRightOf="@+id/imgnext"
+            android:text="收到指令"
+            android:textColor="#000000"
+            android:textSize="@dimen/ziti_13sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/lltitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="bottom">
+
+        <RelativeLayout style="@style/Relname">
+
+            <Button
+                android:id="@+id/btonoffduty"
+                style="@style/MainbuttonStyle"
+                android:background="@drawable/shangxiaban_style" />
+        </RelativeLayout>
+
+        <!--<RelativeLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_weight="1"-->
+        <!--android:visibility="gone">-->
+
+        <!--<Button-->
+        <!--android:id="@+id/pttbutton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:background="@drawable/tel_style"-->
+        <!--android:visibility="gone" />-->
+        <!--</RelativeLayout>-->
+
+        <RelativeLayout style="@style/Relname">
+
+            <Button
+                android:id="@+id/bthome"
+                style="@style/MainbuttonStyle"
+                android:background="@drawable/zhishiku_style" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/Relname">
+
+            <Button
+                android:id="@+id/bthistory"
+                style="@style/MainbuttonStyle"
+                android:background="@drawable/history_style" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/Relname">
+
+            <Button
+                android:id="@+id/gpsbutton"
+                style="@style/MainbuttonStyle"
+                android:background="@drawable/map_style" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

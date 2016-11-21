@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/juli_10dp"
+        android:background="@drawable/searchlocation"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/searchcircle" />
+
+        <EditText
+            android:id="@+id/etbaidumapsearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/juli_10dp"
+            android:layout_weight="1"
+            android:hint="请输入要检索的地点"
+            android:textColor="#C2C4C2"
+            android:background="@null"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/juli_10dp"
+            android:background="@drawable/searchline1" />
+
+        <Button
+            android:id="@+id/btsearchcancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            android:background="@null"
+            android:text="取消"
+            android:textColor="#E8920A"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView_search_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#7C7C7C"
+        android:dividerHeight="0.1dp"
+        android:fastScrollEnabled="true"
+        android:scrollbars="none"
+        android:padding="@dimen/juli_15dp">
+    </ListView>
+
+</LinearLayout>

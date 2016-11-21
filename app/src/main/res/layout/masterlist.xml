@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#d6d8d8"
+    android:focusable="true" 
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gztop" >
+
+        <Button
+            android:id="@+id/masterback"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/gzback" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="专家通讯录"
+            android:textColor="#2a2a2a"
+            android:textSize="26dp" />
+
+        <Button
+            android:id="@+id/masterreset"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/gzreset" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="#e5e5e5"
+        android:gravity="center" >
+
+        <EditText
+            android:id="@+id/etmaster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="搜索专家"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="25dp"
+            android:singleLine="true"
+            android:textColor="#000000"
+            android:textColorHint="#aaaaaa"   
+            android:background="@drawable/gztextbox" >
+        </EditText>
+
+        <Button
+            android:id="@+id/mastersearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:background="@drawable/gzsearch" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gaozhiitem" >
+
+        <TextView            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:textColor="#ff8e14"
+            android:textSize="24dp"
+            android:text="  姓名" />
+
+        <TextView            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"          
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:textColor="#ff8e14"
+            android:textSize="24dp"
+            android:text="电话    " />
+
+        <TextView            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_centerHorizontal="true"           
+            android:layout_centerVertical="true"
+            android:textColor="#ff8e14"
+            android:textSize="24dp"
+            android:text="专家特长" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listmaster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</LinearLayout>

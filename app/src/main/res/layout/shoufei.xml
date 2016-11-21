@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#ffffff">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/juli_20dp" 
+        android:layout_marginBottom="@dimen/juli_20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/juli_10dp"
+            android:text="收费"
+            android:textSize="@dimen/ziti_16sp"
+            android:textColor="#000000" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/etshoufei"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/songwangdizhi"
+            android:layout_marginRight="@dimen/juli_10dp"
+            android:layout_marginLeft="5dp" 
+            android:numeric="integer">
+        </EditText>
+    </LinearLayout>
+    
+
+</LinearLayout>

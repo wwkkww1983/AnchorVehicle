@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pink">#F08080</color>
+    <color name="While">#FFFFFF</color>
+    <color name="yellow">#CDCD00</color>
+    <color name="blue">#0055cd</color>
+    <color name="bluegreen">#8B2500</color>
+    <color name="pinks">#00ff7b</color>
+    <color name="red">#f00</color>
+    <color name="yellownew">#EE9A00</color>
+    <color name="green">#00CD00</color>
+    <color name="black">#000000</color>
+</resources>

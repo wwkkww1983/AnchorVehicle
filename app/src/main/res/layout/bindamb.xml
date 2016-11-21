@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:id="@+id/llypinglun"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"   
+        android:paddingBottom="10dp"     
+        android:background="@drawable/lh" >
+        <TextView
+            android:id="@+id/textView4_cheliang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="12dp"
+            android:text="选择当班车辆："
+            android:textColor="#000000"
+             />        
+        <EditText
+            android:id="@+id/etcheliang"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/btSetBindAmb"
+            android:layout_toRightOf="@+id/textView4_cheliang" 
+            android:textSize="@dimen/ziti_13sp"/>   
+        <Button
+            android:id="@+id/btSetBindAmb"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/bindamb"
+            android:text="确  定" 
+            android:textSize="12dp"
+            android:textColor="#ffffff"/>
+    </RelativeLayout>
+
+</LinearLayout>

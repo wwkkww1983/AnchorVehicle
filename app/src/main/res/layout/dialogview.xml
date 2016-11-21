@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="horizontal"
+android:layout_width = "fill_parent"
+android:layout_height = "fill_parent"
+>
+     
+    <TextView
+        android:id="@+id/textView_GongHao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请输入工号:">
+     </TextView>
+  
+    
+    <EditText
+        android:id="@+id/searchC"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="left"
+        android:hint=""
+         />
+
+
+</LinearLayout>
+

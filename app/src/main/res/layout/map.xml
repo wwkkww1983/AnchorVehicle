@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
+
+    <!-- 搜索执行按钮 -->
+
+    <ImageView
+        android:id="@+id/center_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/diwei" />
+
+    <RelativeLayout
+        android:id="@+id/llmapserch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_margin="@dimen/juli_10dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/searchlocation"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/searchcircle"/>
+
+            <TextView
+                android:id="@+id/location_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="请输入要检索的地点"
+                android:textColor="#BEBFBF"
+                android:layout_marginLeft="@dimen/juli_10dp"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/searchline1"
+                android:layout_marginRight="@dimen/juli_10dp"/>
+
+            <Button
+                android:id="@+id/btback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确定"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:textColor="@drawable/selector"
+                android:textSize="18sp"
+                android:layout_marginRight="20dp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</FrameLayout>
+
+

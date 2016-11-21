@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/gaozhiitem"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/mastercontent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:text="张三"
+            android:textColor="#6c6c6c"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/mastertel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="14dp"
+            android:layout_alignParentRight="true"            
+            android:background="@drawable/gztel" />
+
+        <TextView
+            android:id="@+id/mastertype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="#6c6c6c"
+            android:textSize="24dp" 
+            android:text="心脑科专家" />
+                  
+    </RelativeLayout>
+
+</LinearLayout>
