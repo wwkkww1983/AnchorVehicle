@@ -28,6 +28,7 @@ import com.anke.vehicle.status.TrueOrFalseStatus;
 import com.anke.vehicle.status.WorkState;
 import com.anke.vehicle.utils.CommonUtils;
 import com.anke.vehicle.utils.CustomDialogs;
+import com.anke.vehicle.utils.SPUtils;
 import com.anke.vehicle.utils.UpDateDB;
 import com.anke.vehicle.utils.Utility;
 import com.anke.vehicle.utils.ZDYDialog;
@@ -61,6 +62,7 @@ public class ParameterSetActivity extends Activity {
     private SetView mPause;//暂停调用
     private SetView mDataUpdate;//数据更新
     private SetView mSetting;//参数设置
+    private SetView svName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +82,7 @@ public class ParameterSetActivity extends Activity {
         mPause.setOnClickListener(svListener);
         mDataUpdate.setOnClickListener(svListener);
         mSetting.setOnClickListener(svListener);
+//        svName.setOnClickListener(svListener);
         btSetback.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -233,6 +236,8 @@ public class ParameterSetActivity extends Activity {
             }
         }
     };
+
+
     /**
      * 根据设置判断暂停(恢复)调用
      */

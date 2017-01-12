@@ -70,6 +70,7 @@ import com.anke.vehicle.entity.PADInfo;
 import com.anke.vehicle.entity.PadAmbInfo;
 import com.anke.vehicle.entity.ParameterInfo;
 import com.anke.vehicle.entity.UpdateManager;
+import com.anke.vehicle.receiver.GrayService;
 import com.anke.vehicle.receiver.MyReceiver;
 import com.anke.vehicle.status.ConnectStatus;
 import com.anke.vehicle.status.CreateDialogsLIst;
@@ -93,6 +94,7 @@ import com.baidu.mapapi.navi.BaiduMapAppNotSupportNaviException;
 import com.baidu.mapapi.navi.BaiduMapNavigation;
 import com.baidu.mapapi.navi.NaviParaOption;
 import com.google.gson.Gson;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -210,17 +212,16 @@ public class MainActivity extends Activity {
     private static final int HEARTS = 2;
     private static final int UPDATE_DB = 6;//更新数据库信息
     public static final int SEND2SERVER = 3;//向服务器发消息
-    int serverLines = 0;//服务器异常尝试连接次数
     private CustomDialogs dialogs;
     private AlertDialog alertDialog;
     private MyApplication myApplication;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initUI();//初始化UI控件
         is_lianjie = false;
+           GrayService.GrayInnerService.isLive = true;
         CommonUtils.ShowDBExist(this);//确定手机中有数据库，不存在就把raw里的数据库写入手机
         dbHelper = new DBHelper(this);
         ParameterSetActivity.myHandler = myHandlerPause; // 2016-05-05 xmx
@@ -255,6 +256,8 @@ public class MainActivity extends Activity {
             mHandler.sendMessage(m); // 连接服务端
         }
         RegisterAlarm();//注册时钟
+        Intent grayIntent = new Intent(getApplicationContext(), GrayService.class);
+        startService(grayIntent);
     }
 
     /**
@@ -509,6 +512,7 @@ public class MainActivity extends Activity {
                         ChangeDingWei(ninfo.StationInterval);
                 }
                 if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+
                     if (mWorkstateID < WorkState.ROADWAITTING)
                         ChangeDingWei(ninfo.TaskInterval);
                     else
@@ -543,6 +547,7 @@ public class MainActivity extends Activity {
     private void ShowCenterName(int sign) {
         if (sign == 1) {
             tvcentername.setText(Utility.dinfo.getCenterName());
+            String s1 = Utility.dinfo.getAmbDeskName();
             tvambname.setText(Utility.dinfo.getAmbDeskName());
             tvvison.setText("V" + Utility.versionName);
             rlycommand.setVisibility(View.GONE);
@@ -583,8 +588,6 @@ public class MainActivity extends Activity {
         tvState.setTextColor(Color.RED);
         tvStatemain.setText("不能调用");
         tvStatemain.setTextColor(Color.GRAY);
-        // mStatelly.setBackgroundDrawable(getResources().getDrawable(
-        // R.drawable.nextoff_land_wenzi)); 2016-05-05
     }
 
     /**
@@ -630,6 +633,7 @@ public class MainActivity extends Activity {
          * @param msg
          */
         public void handleMessage(Message msg) {
+
             if (msg.what == HEARTS) {
                 if (Is_connect == true || is_lianjie == true) {
                     if (mactive < 1) { // 判断心跳次数是否小于1 2016-01-18 xmx
@@ -665,9 +669,11 @@ public class MainActivity extends Activity {
             }
 
             if (msg.what == ServerStatus.SERVER_OR_Client_EXCEPTION) {//后台服务器异常或者客户端网络异常走这一步
-
-                if (ctx != null)
+                if (ctx != null){
                     ctx.close();
+
+                }
+
                 if (dbHelper.GetParameter().getIsBindCar() == TrueOrFalseStatus.FAlSE) { // 判断是否绑定车辆
                     // 2016-06-22
                     // xmx
@@ -805,7 +811,7 @@ public class MainActivity extends Activity {
                 lvlhlist.setAdapter(daAdapter);
             btfasong.setOnClickListener(new OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v) {//上班按钮
                     // TODO Auto-generated method stub
                     if (ctx != null) {
                         if (!"".equals(etfasong.getText().toString().trim())) {
@@ -815,6 +821,7 @@ public class MainActivity extends Activity {
                             info.setM_PersonCode(etfasong.getText().toString());
                             Gson gson = new Gson();
                             String jsonStr = gson.toJson(info);
+                           // SPUtils.putSP(MainActivity.this,"onWork","1");//兼容苏州
                             sendMsg(jsonStr, msgProcessList.NOTICE_LIST, mTaskOrder, mWorkstateID);
                             etfasong.setText("");
                             dl.dismiss();
@@ -953,7 +960,7 @@ public class MainActivity extends Activity {
             tvname.setText(ppInfo.get(position).getName());
             btoffduty.setOnClickListener(new OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v) {//下班按钮
                     // TODO Auto-generated method stub
                     if (ctx != null) {
                         if (!"".equals(ppInfo.get(position).getWorkCode())) {
@@ -963,6 +970,7 @@ public class MainActivity extends Activity {
                             info.setM_PersonCode(ppInfo.get(position).getWorkCode());
                             Gson gson = new Gson();
                             String jsonStr = gson.toJson(info);
+//                            SPUtils.putSP(MainActivity.this,"outwork","2");//兼容苏州
                             sendMsg(jsonStr, msgProcessList.NOTICE_LIST, mTaskOrder, mWorkstateID);
                             dl.dismiss();
                         }
@@ -1039,7 +1047,7 @@ public class MainActivity extends Activity {
      * @param workstateid
      * @param taskOrder
      */
-    public void StateChange(int workstateid, int taskOrder) {
+    public void StateChange(int workstateid, int taskOrder) {//改变车载状态
         // 定位时间判断 2016-6-22 xmx
         if (mWorkstateID < WorkState.ROADWAITTING) // 判断当前状态
         {
@@ -1050,6 +1058,19 @@ public class MainActivity extends Activity {
             if (workstateid < WorkState.ROADWAITTING)
                 ChangeDingWei(ninfo.TaskInterval);
         }
+        //以下代码是为了兼容苏州，苏州上下班返回值有时正常，有时异常
+//        String result1 = SPUtils.getSP(MainActivity.this,"onWork");
+//        String result2 = SPUtils.getSP(MainActivity.this,"outwork");
+//                    if (!TextUtils.isEmpty(result1)){
+//                        workstateid = 7;
+//                        SPUtils.remove(MainActivity.this,"onWork");
+//
+//                    }
+//                    if (!TextUtils.isEmpty(result2)){
+//                        workstateid = 8;
+//                        SPUtils.remove(MainActivity.this,"outwork");
+//                    }
+        //以上兼容苏州
         mWorkstateID = workstateid;
         mTaskOrder = taskOrder;
         switch (mWorkstateID) {
@@ -1071,16 +1092,16 @@ public class MainActivity extends Activity {
                 tvState.setTextColor(getResources().getColor(R.color.yellownew));
                 ShowCenterName(0);
                 showOrHiden();
-//                tvNext.setText("到达现场");
-                tvNext.setText("抢救转送");
+                tvNext.setText("到达现场");
+//                tvNext.setText("抢救转送");
                 tvNext.setTextColor(getResources().getColor(R.color.pink));
                 break;
 
             case WorkState.ARRIVED:
-//                tvState.setText("到达现场");
-//                tvStatemain.setText("到达现场");
-                tvState.setText("抢救转送");
-                tvStatemain.setText("抢救转送");
+                tvState.setText("到达现场");
+                tvStatemain.setText("到达现场");
+//                tvState.setText("抢救转送");
+//                tvStatemain.setText("抢救转送");
                 tvState.setTextColor(getResources().getColor(R.color.pink));
                 ShowCenterName(0);
                 showOrHiden();
@@ -1601,6 +1622,7 @@ public class MainActivity extends Activity {
             String datetime = tempDate.format(new java.util.Date());
             String contentString = s.toString().trim();
             PADInfo info = CommonUtils.getbBaotou(contentString);//
+//            Log.e("Pad信息",info.toString());
             Utility.setTrue(true);
             switch (info.getType()) {
                 case msgProcessList.HEARTBEAT:// 收到心跳
@@ -1669,7 +1691,7 @@ public class MainActivity extends Activity {
                     break;
 
                 case msgProcessList.NOTICE_LIST:// 通知单
-                    StateChange(info.getWorkStateID(), info.getTaskOrder());
+//                    StateChange(info.getWorkStateID(), info.getTaskOrder());
 
                     ShowNotice("收到通知单", "通知内容：" + info.getContent().toString());
                     if (info.getContent().equals("你所在的车辆已经暂停调用")) {
@@ -1705,10 +1727,14 @@ public class MainActivity extends Activity {
                     builder.show();
                     gettype = 2;
                     IsAlterAmb = true;
+//                    Log.e("通知单：" ,mWorkstateID+"");
+
+
                     sendMsg("", msgProcessList.PERSONINF, mTaskOrder, mWorkstateID);
                     break;
 
                 case msgProcessList.PERSONINF:// 请求返回人员信息
+                    StateChange(info.getWorkStateID(), info.getTaskOrder());
                     Gson gson1 = new Gson();
                     java.lang.reflect.Type type1 = new com.google.gson.reflect.TypeToken<NPadAmbPerInfo>() {
                     }.getType();
@@ -1850,16 +1876,18 @@ public class MainActivity extends Activity {
                         // TODO Auto-generated method stub
                         Looper curLooper = Looper.getMainLooper();
                         mHandler = new MyHandler(curLooper);
+                        ctx = type;
+
                         switch (sign) {
                             case ConnectStatus.CONNECT_FAIL: // Netty抛出异常
-                                ctx = type;
+
                                 Message m = mHandler.obtainMessage(ServerStatus.RECONNRCTING, 1, ConnectStatus.CONNECT_FAIL, "");
                                 mHandler.sendMessage(m);
                                 break;
 
                             case ConnectStatus.RECEIVER: // 接收数据处理
                                 mactive = 0;
-                                ctx = type;
+
                                 String commandInfo = CommonUtils.TcommandInfo(result);
                                 if (!commandInfo.equals("")) {
                                     Message m1 = mHandler.obtainMessage(ServerStatus.RECONNRCTING, 1, ConnectStatus.RECEIVER,
@@ -1870,7 +1898,6 @@ public class MainActivity extends Activity {
 
                             case ConnectStatus.CONNECT_SUCCESS: // 连接成功
                                 mactive = 0;
-                                ctx = type;
                                 Message m2 = mHandler.obtainMessage(ServerStatus.RECONNRCTING, 1, ConnectStatus.CONNECT_SUCCESS, "");
                                 mHandler.sendMessage(m2);
                                 break;
@@ -2034,6 +2061,7 @@ public class MainActivity extends Activity {
     private void OutLine() {
         if (ctx != null) { // 判断连接是否断开 2016-01-18
             ctx.close();
+
         }
         OutlineDeal();
     }
@@ -2053,7 +2081,7 @@ public class MainActivity extends Activity {
         final Button btSetBindAmb = (Button) view.findViewById(R.id.btSetBindAmb);
         btSetBindAmb.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//
                 // TODO Auto-generated method stub
                 if (!etcheliang.getText().toString().equals("")) {
                     dl.dismiss();
@@ -2194,7 +2222,7 @@ public class MainActivity extends Activity {
                         asinfo.setSelectLocal(Integer.valueOf(code).intValue());
                         Gson gson = new Gson();
                         String jsonStr = gson.toJson(asinfo);
-                        sendMsg(jsonStr, msgProcessList.SHOW_NAME, mTaskOrder, mWorkstateID); // 发送
+                        sendMsg(jsonStr, msgProcessList.SHOW_NAME, mTaskOrder, mWorkstateID); // 发送给命令单
                         stopReasonName = "";
                         listPadCSInfo.clear();
                     } else {

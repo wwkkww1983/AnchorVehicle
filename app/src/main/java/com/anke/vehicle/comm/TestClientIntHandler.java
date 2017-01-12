@@ -30,6 +30,7 @@ public class TestClientIntHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
+
         if (onMessageListener != null) {  //连接成功
             onMessageListener.onMessage(ctx, ConnectStatus.CONNECT_SUCCESS, null);
         }

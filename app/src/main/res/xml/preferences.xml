@@ -5,12 +5,12 @@
     <PreferenceCategory android:title="网络参数"
         >
         <EditTextPreference
-            android:defaultValue="172.16.100.100"
+            android:defaultValue="61.156.234.171"
             android:key="ServerIp"
             android:summary="请输入服务器ip地址"
             android:title="服务器ip地址" />
         <EditTextPreference
-            android:defaultValue="5007"
+            android:defaultValue="4567"
             android:key="Port"
             android:summary="请输入端口号"
             android:title="端口号" />
@@ -64,12 +64,12 @@
     </PreferenceCategory>
     <PreferenceCategory android:title="自动更新" >
         <EditTextPreference
-            android:defaultValue="http://60.209.235.146/AnchorVehicle/version.txt"
+            android:defaultValue="http://61.156.234.171/AnchorVehicle/version.txt"
             android:key="VersionUrl"
             android:summary="请输入版本文件的URL地址"
             android:title="版本文件" />
         <EditTextPreference
-            android:defaultValue="http://60.209.235.146/AnchorVehicle/AnchorVehicle.apk"
+            android:defaultValue="http://61.156.234.171/AnchorVehicle/AnchorVehicle.apk"
             android:key="ApkUrl"
             android:summary="请输入程序文件下载路径"
             android:title="程序文件" />

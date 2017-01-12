@@ -44,6 +44,7 @@ public class TestClient {
 
                 try {
                     myHandler.sendEmptyMessage(ServerStatus.RECONNRCTING);
+
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

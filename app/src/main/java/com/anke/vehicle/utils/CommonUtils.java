@@ -385,16 +385,27 @@ public class CommonUtils {
      */
     public static boolean checkDataBase() {
         SQLiteDatabase checkDB = null;
-        try {
-            String databaseFilename = DATABASE_PATH + dbName;
-            checkDB = SQLiteDatabase.openDatabase(databaseFilename, null,
+        String databaseFilename = DATABASE_PATH + dbName;
+        File file = new File(databaseFilename);
+        if (file.exists()){
+                        checkDB = SQLiteDatabase.openDatabase(databaseFilename, null,
                     SQLiteDatabase.OPEN_READONLY);
-        } catch (SQLiteException e) {
-
+            if (checkDB != null){
+                checkDB.close();
+            }
+        }else {
+            checkDB = null;
         }
-        if (checkDB != null) {
-            checkDB.close();
-        }
+//        try {
+//            String databaseFilename = DATABASE_PATH + dbName;
+//            checkDB = SQLiteDatabase.openDatabase(databaseFilename, null,
+//                    SQLiteDatabase.OPEN_READONLY);
+//        } catch (SQLiteException e) {
+//
+//        }
+//        if (checkDB != null) {
+//            checkDB.close();
+//        }
         return checkDB != null ? true : false;
     }
 

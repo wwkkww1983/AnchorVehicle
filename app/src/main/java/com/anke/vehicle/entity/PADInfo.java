@@ -48,4 +48,15 @@ public class PADInfo
 	{
 		WorkStateID = workStateID;
 	}
+
+	@Override
+	public String toString() {
+		return "PADInfo{" +
+				"TelCode='" + TelCode + '\'' +
+				", TaskOrder=" + TaskOrder +
+				", WorkStateID=" + WorkStateID +
+				", Type=" + Type +
+				", Content=" + Content +
+				'}';
+	}
 }

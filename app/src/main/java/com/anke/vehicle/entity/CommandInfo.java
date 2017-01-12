@@ -91,6 +91,21 @@ public class CommandInfo
 	public void setTaskCode(String taskCode)
 	{
 		TaskCode = taskCode;
-	}	
-	
+	}
+
+	@Override
+	public String toString() {
+		return "CommandInfo{" +
+				"IsLabeled=" + IsLabeled +
+				", AlarmTel='" + AlarmTel + '\'' +
+				", LinkTel='" + LinkTel + '\'' +
+				", Extension='" + Extension + '\'' +
+				", X=" + X +
+				", Y=" + Y +
+				", AmbCode='" + AmbCode + '\'' +
+				", TaskCode='" + TaskCode + '\'' +
+				", SendTime='" + SendTime + '\'' +
+				", Content='" + Content + '\'' +
+				'}';
+	}
 }

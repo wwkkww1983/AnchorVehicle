@@ -28,17 +28,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
+
     private final static String DATABASE_NAME = "anchorvehicle.db";
     private final static int DATABASE_VERSION = 2;
 
-    public DBHelper(Context context, String name, CursorFactory factory,
-                    int version) {
-        super(context, name, factory, version);
-        // TODO Auto-generated constructor stub
-    }
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
 
     }
 
@@ -343,7 +340,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return info;
     }
-
     // 保存历史记录
     public String SaveHistory(HistoryInfo info) {
         String ret = "";

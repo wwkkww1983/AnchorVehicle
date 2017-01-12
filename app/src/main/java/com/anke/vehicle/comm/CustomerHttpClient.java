@@ -58,7 +58,8 @@ public class CustomerHttpClient {
     private String PostData(List<NameValuePair> datas) {
         String ret = "";
         if (serverUrl.equals(""))
-            serverUrl = "http://" + Utility.getServerIp() + ":" + Utility.getHttpport() + "/";
+//            serverUrl = "http://" + Utility.getServerIp() + ":" + Utility.getHttpport() + "/";
+        serverUrl = "http://" + Utility.getServerIp() + ":" + Utility.getHttpport() + "/";
         HttpPost httppost = new HttpPost(serverUrl);
 
         try {

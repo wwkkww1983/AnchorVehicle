@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.anke.vehicle.R;
 import com.anke.vehicle.entity.PoiSearchAdapter;

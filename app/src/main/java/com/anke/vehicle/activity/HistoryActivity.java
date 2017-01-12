@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -462,6 +463,7 @@ public class HistoryActivity extends Activity {
             npsfInfo.setTaskCoding(taskcode);
             npsfInfo.setShoufei(shoufei);
             String ret = CustomerHttpClient.getInstance().SaveCureCharge(npsfInfo);
+            Log.e("收费服务器返回值",ret);
             if (ret.contains("成功")) {
                 m = mHandler.obtainMessage(1, 1, 1, ret);
             } else
