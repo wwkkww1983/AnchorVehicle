@@ -16,6 +16,7 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo.State;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -71,6 +72,7 @@ import com.anke.vehicle.entity.PadAmbInfo;
 import com.anke.vehicle.entity.ParameterInfo;
 import com.anke.vehicle.entity.UpdateManager;
 import com.anke.vehicle.receiver.GrayService;
+import com.anke.vehicle.receiver.MyJobService;
 import com.anke.vehicle.receiver.MyReceiver;
 import com.anke.vehicle.status.ConnectStatus;
 import com.anke.vehicle.status.CreateDialogsLIst;
@@ -215,6 +217,8 @@ public class MainActivity extends Activity {
     private CustomDialogs dialogs;
     private AlertDialog alertDialog;
     private MyApplication myApplication;
+    private Intent grayIntent;
+    public static boolean isreConnc = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -256,8 +260,15 @@ public class MainActivity extends Activity {
             mHandler.sendMessage(m); // 连接服务端
         }
         RegisterAlarm();//注册时钟
-        Intent grayIntent = new Intent(getApplicationContext(), GrayService.class);
-        startService(grayIntent);
+        //高于android5.0用下面进程保活
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            grayIntent = new Intent(getApplicationContext(), MyJobService.class);
+            startService(grayIntent);
+        }else{//地狱Android5.0用以下保活
+            Intent intent = new Intent(getApplicationContext(), GrayService.class);
+            startService(intent);
+        }
+
     }
 
     /**
@@ -1394,7 +1405,9 @@ public class MainActivity extends Activity {
                     return false;
                 }
             }
-            Exit(); // 退出
+//            Exit(); // 退出
+            moveTaskToBack(false);
+
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -1628,6 +1641,14 @@ public class MainActivity extends Activity {
                 case msgProcessList.HEARTBEAT:// 收到心跳
                     mactive = 0;
                     //StateChange(info.getWorkStateID(), info.getTaskOrder());
+                    if (isreConnc){
+                        isreConnc = false;
+                        IsAlterAmb = true;
+                        gettype = 2;
+                        sendMsg("", msgProcessList.PERSONINF, mTaskOrder, mWorkstateID);
+
+                    }
+
                     break;
 
                 case msgProcessList.STATE_SYNCH:// 状态同步

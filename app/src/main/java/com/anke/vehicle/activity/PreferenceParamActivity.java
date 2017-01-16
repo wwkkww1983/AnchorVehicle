@@ -198,6 +198,7 @@ public class PreferenceParamActivity extends PreferenceActivity {
                 public void run() {
                     handler.sendEmptyMessage(123);
                     isChange = false;
+                    MainActivity.isreConnc = true;
                 }
             }.start();
 
