@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -50,7 +51,7 @@ public class UpdateManager
 	// "http://180.9.0.42/BJPatientRecord/version.txt";
 	private Dialog downloadDialog;
 	/* 下载包安装路径 */
-	private static final String savePath = "/sdcard/";
+	private static final String savePath = Environment.getExternalStorageDirectory() + "/";
 	private static final String saveFileName = savePath + "UpdateVehicle.apk";
 	/* 进度条与通知ui刷新的handler和msg常量 */
 	private ProgressBar mProgress;

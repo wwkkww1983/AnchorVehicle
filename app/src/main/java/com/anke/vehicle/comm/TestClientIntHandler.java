@@ -1,10 +1,8 @@
 package com.anke.vehicle.comm;
 
-import android.text.TextUtils;
 
-import com.anke.vehicle.entity.PADInfo;
+
 import com.anke.vehicle.status.ConnectStatus;
-import com.google.gson.Gson;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

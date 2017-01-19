@@ -4,18 +4,12 @@ import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.os.Build;
-import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
-import java.util.List;
 
 /**
  * 灰色保活手法创建的Service进程
@@ -36,13 +30,13 @@ public class GrayService extends Service {
 
     @Override
     public void onCreate() {
-        Log.i(TAG, "GrayService->onCreate");
+//        Log.i(TAG, "GrayService->onCreate");
         super.onCreate();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i(TAG, "GrayService->onStartCommand");
+//        Log.i(TAG, "GrayService->onStartCommand");
         if (Build.VERSION.SDK_INT < 18) {
             startForeground(GRAY_SERVICE_ID, new Notification());//API < 18 ，此方法能有效隐藏Notification上的图标
         } else {
@@ -67,7 +61,7 @@ public class GrayService extends Service {
 
     @Override
     public void onDestroy() {
-        Log.i(TAG, "GrayService->onDestroy");
+//        Log.i(TAG, "GrayService->onDestroy");
         super.onDestroy();
     }
 
@@ -75,7 +69,6 @@ public class GrayService extends Service {
      * 给 API >= 18 的平台上用的灰色保活手段
      */
     public static class GrayInnerService extends Service {
-                public static boolean isLive = false;
         @Override
         public void onCreate() {
             Log.i(TAG, "InnerService -> onCreate");
@@ -91,33 +84,7 @@ public class GrayService extends Service {
             stopSelf();
             return super.onStartCommand(intent, flags, startId);
         }
-        /**
-         * 在一个程序中启动另外一个app
-         * @param packageName
-         */
-        private void openApp(String packageName) {
-            PackageManager pm = getPackageManager();
-            PackageInfo pi = null;
-            try {
-                pi = pm.getPackageInfo(packageName, 0);
-            } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
-            }
-            Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);
-            resolveIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-            resolveIntent.setPackage(pi.packageName);
-            List<ResolveInfo> apps = pm.queryIntentActivities(resolveIntent, 0);
-            ResolveInfo ri = apps.iterator().next();
-            if (ri != null) {
-                // String packageName = ri.activityInfo.packageName;
-                String className = ri.activityInfo.name;//获取到启动Activity的类名
-                Intent intent = new Intent(Intent.ACTION_MAIN);//下面是通过包名和启动Activity的类名，启动程序
-                intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                ComponentName cn = new ComponentName(packageName, className);
-                intent.setComponent(cn);
-                startActivity(intent);
-            }
-        }
+
         @Override
         public IBinder onBind(Intent intent) {
             // TODO: Return the communication channel to the service.

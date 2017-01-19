@@ -10,6 +10,9 @@ import com.anke.vehicle.database.DBHelper;
 import com.anke.vehicle.status.TrueOrFalseStatus;
 import com.anke.vehicle.utils.Utility;
 
+/**
+ * 配置界面 配置ip 端口 以及终止等按钮
+ */
 public class PreferenceParamActivity extends PreferenceActivity {
     private DBHelper dbHelper;
     public  static Handler handler;
@@ -100,8 +103,10 @@ public class PreferenceParamActivity extends PreferenceActivity {
                 isChange = true;
             } else if (preference.getKey().equals("VersionUrl")) {
                 Utility.setVersionUrl(newValue.toString());
+                isChange = true;
             } else if (preference.getKey().equals("ApkUrl")) {
                 Utility.setApkUrl(newValue.toString());
+                isChange = true;
             }
 
             //是否上传GPS

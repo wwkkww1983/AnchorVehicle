@@ -218,14 +218,13 @@ public class MainActivity extends Activity {
     private AlertDialog alertDialog;
     private MyApplication myApplication;
     private Intent grayIntent;
-    public static boolean isreConnc = false;
+    public static boolean isreConnc = false;//更改ip,端口，http端口，电话，程序文件 程序版本号，是否重新连接，默认不连接
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initUI();//初始化UI控件
         is_lianjie = false;
-           GrayService.GrayInnerService.isLive = true;
         CommonUtils.ShowDBExist(this);//确定手机中有数据库，不存在就把raw里的数据库写入手机
         dbHelper = new DBHelper(this);
         ParameterSetActivity.myHandler = myHandlerPause; // 2016-05-05 xmx
@@ -264,7 +263,7 @@ public class MainActivity extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             grayIntent = new Intent(getApplicationContext(), MyJobService.class);
             startService(grayIntent);
-        }else{//地狱Android5.0用以下保活
+        }else{//低于Android5.0用以下保活
             Intent intent = new Intent(getApplicationContext(), GrayService.class);
             startService(intent);
         }
@@ -1406,7 +1405,7 @@ public class MainActivity extends Activity {
                 }
             }
 //            Exit(); // 退出
-            moveTaskToBack(false);
+            moveTaskToBack(false);//假退出
 
         }
         return super.onKeyDown(keyCode, event);
@@ -1641,6 +1640,7 @@ public class MainActivity extends Activity {
                 case msgProcessList.HEARTBEAT:// 收到心跳
                     mactive = 0;
                     //StateChange(info.getWorkStateID(), info.getTaskOrder());
+                    //下面代码是为了更改ip而重新连接网络
                     if (isreConnc){
                         isreConnc = false;
                         IsAlterAmb = true;

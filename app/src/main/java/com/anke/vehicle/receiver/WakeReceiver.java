@@ -9,8 +9,6 @@ import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.anke.vehicle.activity.MainActivity;
-
 public class WakeReceiver extends BroadcastReceiver {
 
     private final static String TAG = WakeReceiver.class.getSimpleName();
@@ -38,13 +36,13 @@ public class WakeReceiver extends BroadcastReceiver {
 
         @Override
         public void onCreate() {
-            Log.i(TAG, "WakeNotifyService->onCreate");
+//            Log.i(TAG, "WakeNotifyService->onCreate");
             super.onCreate();
         }
 
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
-            Log.i(TAG, "WakeNotifyService->onStartCommand");
+//            Log.i(TAG, "WakeNotifyService->onStartCommand");
             if (Build.VERSION.SDK_INT < 18) {
                 startForeground(WAKE_SERVICE_ID, new Notification());//API < 18 ，此方法能有效隐藏Notification上的图标
             } else {
@@ -63,7 +61,7 @@ public class WakeReceiver extends BroadcastReceiver {
 
         @Override
         public void onDestroy() {
-            Log.i(TAG, "WakeNotifyService->onDestroy");
+//            Log.i(TAG, "WakeNotifyService->onDestroy");
             super.onDestroy();
         }
     }
@@ -75,13 +73,13 @@ public class WakeReceiver extends BroadcastReceiver {
 
         @Override
         public void onCreate() {
-            Log.i(TAG, "InnerService -> onCreate");
+//            Log.i(TAG, "InnerService -> onCreate");
             super.onCreate();
         }
 
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
-            Log.i(TAG, "InnerService -> onStartCommand");
+//            Log.i(TAG, "InnerService -> onStartCommand");
             startForeground(WAKE_SERVICE_ID, new Notification());
             //stopForeground(true);
             stopSelf();
@@ -96,7 +94,7 @@ public class WakeReceiver extends BroadcastReceiver {
 
         @Override
         public void onDestroy() {
-            Log.i(TAG, "InnerService -> onDestroy");
+//            Log.i(TAG, "InnerService -> onDestroy");
             super.onDestroy();
         }
     }

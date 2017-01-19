@@ -9,11 +9,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 
 import com.anke.vehicle.activity.MainActivity;
-
-import java.lang.reflect.Method;
 
 /**
  * Created by Administrator on 2017/1/13 0013.
@@ -52,13 +49,13 @@ public class MyJobService extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
-        Log.e("brycegao", "onStartJob alive");
+//        Log.e("brycegao", "onStartJob alive");
         return false;
     }
 
     @Override
     public boolean onStopJob(JobParameters jobParameters) {
-        Log.e("brycegao", "onStopJob");
+//        Log.e("brycegao", "onStopJob");
         return false;
     }
 }

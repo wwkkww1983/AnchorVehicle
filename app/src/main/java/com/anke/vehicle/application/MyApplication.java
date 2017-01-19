@@ -60,6 +60,7 @@ public class MyApplication extends Application
 				mCallBack.onSuccess(location);
 		}
 	}
+
 	private static Map<String,Activity> destoryMap = new HashMap<>();
 	/**
 	 * 添加到销毁队列
