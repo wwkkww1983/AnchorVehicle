@@ -20,6 +20,10 @@ public class SPUtils {
         SharedPreferences sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
         sp.edit().putString(key,name).commit();
     }
+    public static void putSPBollen(Context context, String key,boolean name) {
+        SharedPreferences sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        sp.edit().putBoolean(key,name).commit();
+    }
 
     /**
      * 获取值
@@ -30,6 +34,10 @@ public class SPUtils {
     public static String getSP(Context context,String key) {
         SharedPreferences sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
        return sp.getString(key,"");
+    }
+    public static boolean getSPBolean(Context context,String key) {
+        SharedPreferences sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        return sp.getBoolean(key,false);
     }
     /**
     移除某个key值已经对应的值

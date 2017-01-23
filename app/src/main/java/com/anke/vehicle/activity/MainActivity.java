@@ -23,6 +23,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.PowerManager;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -50,6 +51,7 @@ import com.anke.vehicle.comm.TestClient;
 import com.anke.vehicle.comm.TestClientIntHandler;
 import com.anke.vehicle.comm.TestClientIntHandler.OnMessageListener;
 import com.anke.vehicle.database.DBHelper;
+import com.anke.vehicle.database.SPUtilss;
 import com.anke.vehicle.entity.AmbPauseReasonInfo;
 import com.anke.vehicle.entity.AmbStopTaskInfo;
 import com.anke.vehicle.entity.BaiduToGpsInfo;
@@ -84,6 +86,7 @@ import com.anke.vehicle.status.WorkState;
 import com.anke.vehicle.status.msgProcessList;
 import com.anke.vehicle.utils.CommonUtils;
 import com.anke.vehicle.utils.CustomDialogs;
+import com.anke.vehicle.utils.SPUtils;
 import com.anke.vehicle.utils.UpDateDB;
 import com.anke.vehicle.utils.Utility;
 import com.anke.vehicle.utils.ZDYDialog;
@@ -109,6 +112,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.netty.channel.ChannelHandlerContext;
+
+import static com.anke.vehicle.database.SPUtilss.get;
+import static com.anke.vehicle.utils.SPUtils.getSP;
 
 /**
  * 程序入口
@@ -257,8 +263,17 @@ public class MainActivity extends Activity {
             mHandler = new MyHandler(curLooper);
             Message m = mHandler.obtainMessage(ServerStatus.RECONNRCTING, ALLOW_BIND, 0, "");
             mHandler.sendMessage(m); // 连接服务端
+        }else {
+            boolean isAtuo = (boolean) SPUtilss.get(this,"isAUTO",false);
+            final String isBD = (String) SPUtilss.get(this,"isBD","");
+            if (!isAtuo && !TextUtils.isEmpty(isBD)){
+                //非正常退出时
+                atuoBD(isBD);
+            }
         }
         RegisterAlarm();//注册时钟
+        SPUtilss.put(getApplicationContext(),"isLast",false);
+        SPUtilss.put(this,"isAUTO",false);
         //高于android5.0用下面进程保活
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             grayIntent = new Intent(getApplicationContext(), MyJobService.class);
@@ -268,6 +283,43 @@ public class MainActivity extends Activity {
             startService(intent);
         }
 
+    }
+
+    private void atuoBD(final String isBD) {
+        new Thread(){
+            public void run() {
+                // TODO Auto-generated method stub
+                Looper curLooper = Looper.getMainLooper();
+                mHandler = new MyHandler(curLooper);
+                Message m = new Message();
+                String str = "车辆获取失败";
+                NPadModifyBandAmbInfo npmbaInfo = new NPadModifyBandAmbInfo();
+
+                npmbaInfo.setAmbCode(isBD);
+                npmbaInfo.setTelCode(Utility.getPhone());
+                Gson gson = new Gson();
+                String jsonStr = gson.toJson(npmbaInfo);
+                String ret = CustomerHttpClient.getInstance().SetBindAmb(jsonStr);
+                JSONObject jsonObject;
+                try {
+                    jsonObject = new JSONObject(ret);
+                    String resultString = Utility.GetJsonValue("Result", jsonObject);
+                    if (ret.contains("success")) {
+                        str = ret;
+                        m = mHandler.obtainMessage(ServerStatus.RECONNRCTING, UPDATE_DB,
+                                UpdataBDList.DEAL_BIND_AMB, str);//11
+                    } else {
+                        str = "绑定车辆失败！原因：" + ret;
+                        m = mHandler.obtainMessage(ServerStatus.RECONNRCTING, UPDATE_DB,
+                                UpdataBDList.BIND_AMB_FAIL, str);
+                    }
+                    mHandler.sendMessage(m);
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     /**
@@ -631,6 +683,10 @@ public class MainActivity extends Activity {
         }
     }
 
+    /**
+     *
+     * 主Handler
+     */
 
     public class MyHandler extends Handler {
         public MyHandler(Looper looper) {
@@ -817,8 +873,14 @@ public class MainActivity extends Activity {
             final Button btfasong = (Button) view.findViewById(R.id.btfasong);
             final Button btrefrash = (Button) view.findViewById(R.id.btrefrash);
             ppInfo = info.getPPInfo();
+            if (ppInfo.isEmpty()){
+                //更换车辆显示
+            }else {
+                //不更换车辆
+            }
             if (!ppInfo.isEmpty())
                 lvlhlist.setAdapter(daAdapter);
+
             btfasong.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {//上班按钮
@@ -1362,6 +1424,9 @@ public class MainActivity extends Activity {
         }
     };
 
+    /**
+     * 退出程序
+     */
     public void Exit() {
         ZDYDialog zdyDialog = new ZDYDialog(this, "您确定要退出吗?", false);
         zdyDialog.setZdYinterface(new ZDYDialog.ZDYinterface() {
@@ -1371,6 +1436,8 @@ public class MainActivity extends Activity {
                     setResult(RESULT_OK);
                     if (mNotificationManager != null)
                         mNotificationManager.cancelAll();
+                    SPUtilss.put(getApplicationContext(),"isLast",true);
+                    SPUtilss.put(getApplicationContext(),"isAUTO",true);
                     MainActivity.this.finish();
                 }
 
@@ -1404,13 +1471,12 @@ public class MainActivity extends Activity {
                     return false;
                 }
             }
-//            Exit(); // 退出
-            moveTaskToBack(false);//假退出
+            Exit(); // 退出
+//            moveTaskToBack(false);//假退出
 
         }
         return super.onKeyDown(keyCode, event);
     }
-
     @Override
     protected void onDestroy() {
         // TODO Auto-generated method stub
@@ -1426,7 +1492,6 @@ public class MainActivity extends Activity {
         if (mLocationClient.isStarted())
             mLocationClient.stop();
         super.onDestroy();
-        System.exit(0);
     }
 
 
@@ -1641,13 +1706,13 @@ public class MainActivity extends Activity {
                     mactive = 0;
                     //StateChange(info.getWorkStateID(), info.getTaskOrder());
                     //下面代码是为了更改ip而重新连接网络
-                    if (isreConnc){
-                        isreConnc = false;
+//                    if (isreConnc){
+//                        isreConnc = false;
                         IsAlterAmb = true;
                         gettype = 2;
                         sendMsg("", msgProcessList.PERSONINF, mTaskOrder, mWorkstateID);
-
-                    }
+//
+//                    }
 
                     break;
 
@@ -2164,6 +2229,10 @@ public class MainActivity extends Activity {
             Message m = new Message();
             String str = "车辆获取失败";
             NPadModifyBandAmbInfo npmbaInfo = new NPadModifyBandAmbInfo();
+            //连接车辆判断
+            String cheliangString = etcheliang.getText().toString().trim();
+            SPUtilss.put(MainActivity.this,"isBD",cheliangString);
+            //111111111111111
             npmbaInfo.setAmbCode(etcheliang.getText().toString());
             npmbaInfo.setTelCode(Utility.getPhone());
             Gson gson = new Gson();

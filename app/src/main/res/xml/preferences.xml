@@ -31,7 +31,7 @@
         <CheckBoxPreference 
             android:title="是否绑定车辆"
             android:key="isBindCar"
-            android:checked="true"
+            android:defaultValue="true"
             />
         <CheckBoxPreference 
             android:title="是否允许终止任务"

@@ -9,14 +9,20 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 
 import com.anke.vehicle.activity.MainActivity;
+import com.anke.vehicle.database.SPUtilss;
+import com.anke.vehicle.utils.SPUtils;
 
 /**
  * Created by Administrator on 2017/1/13 0013.
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class MyJobService extends JobService {
+     boolean isFirst = true;
+    private JobScheduler jobScheduler;
+
     @Override
     public void onCreate() {
 
@@ -25,7 +31,11 @@ public class MyJobService extends JobService {
             dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             dialogIntent.addCategory(Intent.CATEGORY_HOME);
             getApplication().startActivity(dialogIntent);
+        if (isFirst){
+            isFirst = false;
             startJobSheduler();
+        }
+
     }
 
     public void startJobSheduler() {
@@ -34,7 +44,7 @@ public class MyJobService extends JobService {
             JobInfo.Builder builder = new JobInfo.Builder(id,
                     new ComponentName(getPackageName(), MyJobService.class.getName()));
             builder.setPeriodic(1000 * 30);  //间隔500毫秒调用onStartJob函数， 500只是为了验证
-            JobScheduler jobScheduler = (JobScheduler) this.getSystemService(Context.JOB_SCHEDULER_SERVICE);
+            jobScheduler = (JobScheduler) this.getSystemService(Context.JOB_SCHEDULER_SERVICE);
             int ret = jobScheduler.schedule(builder.build());
 //             Android24版本才有scheduleAsPackage方法， 期待中
 //Class clz = Class.forName("android.app.job.JobScheduler");
@@ -49,7 +59,12 @@ public class MyJobService extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
-//        Log.e("brycegao", "onStartJob alive");
+        Log.e("MyJobService", "onStartJob alive");
+        boolean isLast = (boolean) SPUtilss.get(getApplicationContext(),"isLast",false);
+        if (isLast){
+            Log.e("MyJobService111", "onStartJob alive");
+             jobScheduler.cancelAll();
+        }
         return false;
     }
 
