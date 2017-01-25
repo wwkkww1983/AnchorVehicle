@@ -45,7 +45,7 @@ public class MyJobService extends JobService {
                     new ComponentName(getPackageName(), MyJobService.class.getName()));
             builder.setPeriodic(1000 * 30);  //间隔500毫秒调用onStartJob函数， 500只是为了验证
             jobScheduler = (JobScheduler) this.getSystemService(Context.JOB_SCHEDULER_SERVICE);
-            int ret = jobScheduler.schedule(builder.build());
+           jobScheduler.schedule(builder.build());
 //             Android24版本才有scheduleAsPackage方法， 期待中
 //Class clz = Class.forName("android.app.job.JobScheduler");
 //Method[] methods = clz.getMethods();
@@ -60,11 +60,6 @@ public class MyJobService extends JobService {
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
         Log.e("MyJobService", "onStartJob alive");
-        boolean isLast = (boolean) SPUtilss.get(getApplicationContext(),"isLast",false);
-        if (isLast){
-            Log.e("MyJobService111", "onStartJob alive");
-             jobScheduler.cancelAll();
-        }
         return false;
     }
 

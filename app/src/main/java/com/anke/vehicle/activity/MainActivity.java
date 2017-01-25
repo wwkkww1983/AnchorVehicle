@@ -43,6 +43,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anke.vehicle.R;
 import com.anke.vehicle.application.MyApplication;
@@ -224,7 +225,11 @@ public class MainActivity extends Activity {
     private AlertDialog alertDialog;
     private MyApplication myApplication;
     private Intent grayIntent;
-    public static boolean isreConnc = false;//更改ip,端口，http端口，电话，程序文件 程序版本号，是否重新连接，默认不连接
+    private RelativeLayout rlGHCL;
+    private TextView tvGHCL;
+    private EditText edGHCL;
+    private Button btGHCL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -255,7 +260,7 @@ public class MainActivity extends Activity {
                 StatellyFormation();//改变按钮状态
             }
         });
-
+        RegisterAlarm();//注册时钟
         // 暂时注释，启动程序时不连服务端 2016-05-06 xmx
         // 是否允许绑定车辆，允许绑定车辆的话就直接连服务端
         if (dbHelper.GetParameter().getIsBindCar() == TrueOrFalseStatus.TRUE) {
@@ -263,17 +268,15 @@ public class MainActivity extends Activity {
             mHandler = new MyHandler(curLooper);
             Message m = mHandler.obtainMessage(ServerStatus.RECONNRCTING, ALLOW_BIND, 0, "");
             mHandler.sendMessage(m); // 连接服务端
-        }else {
-            boolean isAtuo = (boolean) SPUtilss.get(this,"isAUTO",false);
+        }
+ else {
             final String isBD = (String) SPUtilss.get(this,"isBD","");
-            if (!isAtuo && !TextUtils.isEmpty(isBD)){
+            if (!TextUtils.isEmpty(isBD)){
                 //非正常退出时
                 atuoBD(isBD);
             }
         }
-        RegisterAlarm();//注册时钟
-        SPUtilss.put(getApplicationContext(),"isLast",false);
-        SPUtilss.put(this,"isAUTO",false);
+////        RegisterAlarm();//注册时钟
         //高于android5.0用下面进程保活
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             grayIntent = new Intent(getApplicationContext(), MyJobService.class);
@@ -289,35 +292,36 @@ public class MainActivity extends Activity {
         new Thread(){
             public void run() {
                 // TODO Auto-generated method stub
-                Looper curLooper = Looper.getMainLooper();
-                mHandler = new MyHandler(curLooper);
-                Message m = new Message();
-                String str = "车辆获取失败";
-                NPadModifyBandAmbInfo npmbaInfo = new NPadModifyBandAmbInfo();
-
-                npmbaInfo.setAmbCode(isBD);
-                npmbaInfo.setTelCode(Utility.getPhone());
-                Gson gson = new Gson();
-                String jsonStr = gson.toJson(npmbaInfo);
-                String ret = CustomerHttpClient.getInstance().SetBindAmb(jsonStr);
-                JSONObject jsonObject;
-                try {
-                    jsonObject = new JSONObject(ret);
-                    String resultString = Utility.GetJsonValue("Result", jsonObject);
-                    if (ret.contains("success")) {
-                        str = ret;
-                        m = mHandler.obtainMessage(ServerStatus.RECONNRCTING, UPDATE_DB,
-                                UpdataBDList.DEAL_BIND_AMB, str);//11
-                    } else {
-                        str = "绑定车辆失败！原因：" + ret;
-                        m = mHandler.obtainMessage(ServerStatus.RECONNRCTING, UPDATE_DB,
-                                UpdataBDList.BIND_AMB_FAIL, str);
-                    }
-                    mHandler.sendMessage(m);
-                } catch (JSONException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                BdAmbConn(isBD);
+//                Looper curLooper = Looper.getMainLooper();
+//                mHandler = new MyHandler(curLooper);
+//                Message m = new Message();
+//                String str = "车辆获取失败";
+//                NPadModifyBandAmbInfo npmbaInfo = new NPadModifyBandAmbInfo();
+//
+//                npmbaInfo.setAmbCode(isBD);
+//                npmbaInfo.setTelCode(Utility.getPhone());
+//                Gson gson = new Gson();
+//                String jsonStr = gson.toJson(npmbaInfo);
+//                String ret = CustomerHttpClient.getInstance().SetBindAmb(jsonStr);
+//                JSONObject jsonObject;
+//                try {
+//                    jsonObject = new JSONObject(ret);
+//                    String resultString = Utility.GetJsonValue("Result", jsonObject);
+//                    if (ret.contains("success")) {
+//                        str = ret;
+//                        m = mHandler.obtainMessage(ServerStatus.RECONNRCTING, UPDATE_DB,
+//                                UpdataBDList.DEAL_BIND_AMB, str);//11
+//                    } else {
+//                        str = "绑定车辆失败！原因：" + ret;
+//                        m = mHandler.obtainMessage(ServerStatus.RECONNRCTING, UPDATE_DB,
+//                                UpdataBDList.BIND_AMB_FAIL, str);
+//                    }
+//                    mHandler.sendMessage(m);
+//                } catch (JSONException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
             }
         }.start();
     }
@@ -492,6 +496,7 @@ public class MainActivity extends Activity {
      * 初始化各种UI控件
      */
     private void initUI() {
+
         tvSiji = (TextView) findViewById(R.id.tvSiji);
         tvYisheng = (TextView) findViewById(R.id.tvYisheng);
         tvHushi = (TextView) findViewById(R.id.tvHushi);
@@ -872,15 +877,43 @@ public class MainActivity extends Activity {
             final EditText etfasong = (EditText) view.findViewById(R.id.etfasong);
             final Button btfasong = (Button) view.findViewById(R.id.btfasong);
             final Button btrefrash = (Button) view.findViewById(R.id.btrefrash);
+            rlGHCL = (RelativeLayout) view.findViewById(R.id.rlGHCL);
+            tvGHCL = (TextView) view.findViewById(R.id.tvGHCL);
+            edGHCL = (EditText) view.findViewById(R.id.etGHCL);
+            btGHCL = (Button) view.findViewById(R.id.btGHCL);
             ppInfo = info.getPPInfo();
             if (ppInfo.isEmpty()){
-                //更换车辆显示
+                //更换车辆显示  不绑定车辆的时候
+                if (dbHelper.GetParameter().getIsBindCar() == TrueOrFalseStatus.FAlSE){
+                    rlGHCL.setVisibility(View.VISIBLE);
+                }
+
+
+
             }else {
                 //不更换车辆
-            }
-            if (!ppInfo.isEmpty())
-                lvlhlist.setAdapter(daAdapter);
+                if (dbHelper.GetParameter().getIsBindCar() == TrueOrFalseStatus.FAlSE){
+                    rlGHCL.setVisibility(View.GONE);
+                }
 
+                lvlhlist.setAdapter(daAdapter);
+            }
+//            if (!ppInfo.isEmpty())
+            dealBDMenu(edGHCL);//处理搜索绑定车辆时候的下拉菜单
+             btGHCL.setOnClickListener(new OnClickListener() {
+                 @Override
+                 public void onClick(View view) {
+//                     String temp = (String)SPUtilss.get(MainActivity.this,"isBD","");
+                     String trim = edGHCL.getText().toString().trim();
+
+                     if (!TextUtils.isEmpty(trim)){
+                         SPUtils.putSP(MainActivity.this,"isBD",trim);
+                       System.exit(0);
+                     } else{
+                     Toast.makeText(MainActivity.this,"不能为空",Toast.LENGTH_SHORT).show();
+                 }}
+
+             });
             btfasong.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {//上班按钮
@@ -930,6 +963,51 @@ public class MainActivity extends Activity {
             builder.setView(view);
             dl = builder.show();
         }
+    }
+
+    /**
+     * 处理搜索绑定车辆时候的下拉菜单
+     * @param editText
+     */
+    private void dealBDMenu(final EditText editText) {
+        gja = new GJAdapter(editText); // 给适配器传参，用于下拉框的点击事件 2015-11-05 肖明星
+        // 添加编辑框内容改变事件 2015-11-06 肖明星
+        editText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                // TODO Auto-generated method stub
+                if (count > 0) {
+                    if (popView != null) {
+                        popView.dismiss();
+                        popView = null;
+                        String temp = editText.getText().toString();
+                        Dinfos = dbHelper.getAmbNumber(temp);
+                    } else {
+                        String temp = editText.getText().toString();
+                        Dinfos = dbHelper.getAmbNumber(temp);
+                    }
+
+                    if (Dinfos != null && !Dinfos.isEmpty()) {
+                        initPopView(editText);
+                    }
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+
+            }
+        });
     }
 
     /**
@@ -1066,6 +1144,10 @@ public class MainActivity extends Activity {
 
     // 适配器 2015-11-06 肖明星
     class GJAdapter extends BaseAdapter {
+        private EditText editText;
+        public GJAdapter(EditText editText){
+            this.editText = editText;
+        }
         @Override
         public int getCount() {
             // TODO Auto-generated method stub
@@ -1102,8 +1184,8 @@ public class MainActivity extends Activity {
                 public void onClick(View v) {
                     // TODO Auto-generated method stub
                     if (title != null && title != "") {
-                        etcheliang.setText(title);
-                        etcheliang.setSelection(title.length());
+                        editText.setText(title);
+                        editText.setSelection(title.length());
                         if (popView != null)
                             popView.dismiss();
                     }
@@ -1436,8 +1518,6 @@ public class MainActivity extends Activity {
                     setResult(RESULT_OK);
                     if (mNotificationManager != null)
                         mNotificationManager.cancelAll();
-                    SPUtilss.put(getApplicationContext(),"isLast",true);
-                    SPUtilss.put(getApplicationContext(),"isAUTO",true);
                     MainActivity.this.finish();
                 }
 
@@ -1471,8 +1551,8 @@ public class MainActivity extends Activity {
                     return false;
                 }
             }
-            Exit(); // 退出
-//            moveTaskToBack(false);//假退出
+//            Exit(); // 退出
+            moveTaskToBack(false);//假退出
 
         }
         return super.onKeyDown(keyCode, event);
@@ -1492,6 +1572,7 @@ public class MainActivity extends Activity {
         if (mLocationClient.isStarted())
             mLocationClient.stop();
         super.onDestroy();
+        System.exit(0);
     }
 
 
@@ -1706,12 +1787,13 @@ public class MainActivity extends Activity {
                     mactive = 0;
                     //StateChange(info.getWorkStateID(), info.getTaskOrder());
                     //下面代码是为了更改ip而重新连接网络
+
 //                    if (isreConnc){
 //                        isreConnc = false;
                         IsAlterAmb = true;
                         gettype = 2;
                         sendMsg("", msgProcessList.PERSONINF, mTaskOrder, mWorkstateID);
-//
+
 //                    }
 
                     break;
@@ -2134,7 +2216,6 @@ public class MainActivity extends Activity {
                 mHandler.sendMessage(m);
             }
             if (msg.what == 123) {
-
                 Looper curLooper = Looper.getMainLooper();
                 mHandler = new MyHandler(curLooper);
                 Message m = mHandler.obtainMessage(ServerStatus.SERVER_OR_Client_EXCEPTION);
@@ -2178,84 +2259,94 @@ public class MainActivity extends Activity {
                 }
             }
         });
-
-        gja = new GJAdapter(); // 给适配器传参，用于下拉框的点击事件 2015-11-05 肖明星
-        // 添加编辑框内容改变事件 2015-11-06 肖明星
-        etcheliang.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before,
-                                      int count) {
-                // TODO Auto-generated method stub
-                if (count > 0) {
-                    if (popView != null) {
-                        popView.dismiss();
-                        popView = null;
-                        String temp = etcheliang.getText().toString();
-                        Dinfos = dbHelper.getAmbNumber(temp);
-
-                    } else {
-                        String temp = etcheliang.getText().toString();
-                        Dinfos = dbHelper.getAmbNumber(temp);
-                    }
-
-                    if (Dinfos != null && !Dinfos.isEmpty()) {
-                        initPopView(etcheliang);
-                    }
-                }
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-
-            }
-        });
+                dealBDMenu(etcheliang);//处理搜索绑定车辆时候的下拉菜单
+//        gja = new GJAdapter(etcheliang); // 给适配器传参，用于下拉框的点击事件 2015-11-05 肖明星
+//        // 添加编辑框内容改变事件 2015-11-06 肖明星
+//        etcheliang.addTextChangedListener(new TextWatcher() {
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before,
+//                                      int count) {
+//                // TODO Auto-generated method stub
+//                if (count > 0) {
+//                    if (popView != null) {
+//                        popView.dismiss();
+//                        popView = null;
+//                        String temp = etcheliang.getText().toString();
+//                        Dinfos = dbHelper.getAmbNumber(temp);
+//
+//                    } else {
+//                        String temp = etcheliang.getText().toString();
+//                        Dinfos = dbHelper.getAmbNumber(temp);
+//                    }
+//
+//                    if (Dinfos != null && !Dinfos.isEmpty()) {
+//                        initPopView(etcheliang);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count,
+//                                          int after) {
+//                // TODO Auto-generated method stub
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                // TODO Auto-generated method stub
+//
+//            }
+//        });
     }
 
     // 处理Pad绑定车载 2016-01-14 肖明星
     class SetBindAmb implements Runnable {
         public void run() {
             // TODO Auto-generated method stub
-            Looper curLooper = Looper.getMainLooper();
-            mHandler = new MyHandler(curLooper);
-            Message m = new Message();
-            String str = "车辆获取失败";
-            NPadModifyBandAmbInfo npmbaInfo = new NPadModifyBandAmbInfo();
-            //连接车辆判断
             String cheliangString = etcheliang.getText().toString().trim();
-            SPUtilss.put(MainActivity.this,"isBD",cheliangString);
-            //111111111111111
-            npmbaInfo.setAmbCode(etcheliang.getText().toString());
-            npmbaInfo.setTelCode(Utility.getPhone());
-            Gson gson = new Gson();
-            String jsonStr = gson.toJson(npmbaInfo);
-            String ret = CustomerHttpClient.getInstance().SetBindAmb(jsonStr);
-            JSONObject jsonObject;
-            try {
-                jsonObject = new JSONObject(ret);
-                String resultString = Utility.GetJsonValue("Result", jsonObject);
-                if (ret.contains("success")) {
-                    str = ret;
-                    m = mHandler.obtainMessage(ServerStatus.RECONNRCTING, UPDATE_DB,
-                            UpdataBDList.DEAL_BIND_AMB, str);//11
-                } else {
-                    str = "绑定车辆失败！原因：" + ret;
-                    m = mHandler.obtainMessage(ServerStatus.RECONNRCTING, UPDATE_DB,
-                            UpdataBDList.BIND_AMB_FAIL, str);
-                }
-                mHandler.sendMessage(m);
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+            if (!TextUtils.isEmpty(cheliangString)){
+                SPUtilss.put(MainActivity.this,"isBD",cheliangString);
             }
+            BdAmbConn(cheliangString);
+        }
+    }
+
+    private void BdAmbConn(String edString) {
+        Looper curLooper = Looper.getMainLooper();
+        mHandler = new MyHandler(curLooper);
+        Message m = new Message();
+        String str = "车辆获取失败";
+        NPadModifyBandAmbInfo npmbaInfo = new NPadModifyBandAmbInfo();
+        //连接车辆判断
+//            String cheliangString = etcheliang.getText().toString().trim();
+//            if (!TextUtils.isEmpty(cheliangString)){
+//                SPUtilss.put(MainActivity.this,"isBD",cheliangString);
+//            }
+
+        npmbaInfo.setAmbCode(edString);
+        npmbaInfo.setTelCode(Utility.getPhone());
+        Gson gson = new Gson();
+        String jsonStr = gson.toJson(npmbaInfo);
+        String ret = CustomerHttpClient.getInstance().SetBindAmb(jsonStr);
+        JSONObject jsonObject;
+        try {
+            jsonObject = new JSONObject(ret);
+            String resultString = Utility.GetJsonValue("Result", jsonObject);
+            if (ret.contains("success")) {
+                str = ret;
+                m = mHandler.obtainMessage(ServerStatus.RECONNRCTING, UPDATE_DB,
+                        UpdataBDList.DEAL_BIND_AMB, str);//11
+            } else {
+                str = "绑定车辆失败！原因：" + ret;
+                m = mHandler.obtainMessage(ServerStatus.RECONNRCTING, UPDATE_DB,
+                        UpdataBDList.BIND_AMB_FAIL, str);
+            }
+            mHandler.sendMessage(m);
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
